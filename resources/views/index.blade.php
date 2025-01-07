@@ -60,10 +60,12 @@
                     <li>name: {{$user->name}}</li>
                     <li>email: {{$user->email}}</li>
                     <li>phone: {{$user->phone}}</li>
+                    @php $shownPosition = false; @endphp
                     @foreach($positions as $position)
-                        @if( $position->id == $user->position_id )
+                        @if( $position->id == $user->position_id && !$shownPosition)
                             <li>position: {{$position->name}}</li>
                             <li>position_id: {{$position->id}}</li>
+                            @php $shownPosition = true; @endphp
                         @endif
                     @endforeach
                     <li>registration_timestamp: {{$user->created_at}}</li>
