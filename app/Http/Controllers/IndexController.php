@@ -42,17 +42,28 @@ class IndexController extends Controller
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })
-                ->encode('jpg', 90); // Сжатие на уровне 90%
+                ->encode('jpg', 90);
 
             $tempPath = storage_path('app/public/images/temp/' . $filename);
             $image->save($tempPath);
 
-            setKey('1BC4cXMKstgLxcKJbWV6qnkfkzTzJ1VK'); // Укажите ваш API-ключ
-            $source = Source::fromFile($tempPath); // Загрузка файла в TinyPNG
+            setKey('1BC4cXMKstgLxcKJbWV6qnkfkzTzJ1VK');
+            $source = Source::fromFile($tempPath);
             $optimizedPath = 'images/users/' . $filename;
-            $source->toFile(storage_path('app/public/' . $optimizedPath));
+
+            $finalStoragePath = storage_path('app/public/' . $optimizedPath);
+            $source->toFile($finalStoragePath);
+       //     $source->toFile(storage_path('app/public/' . $optimizedPath));
             unlink($tempPath);
-            $data['photo'] = $optimizedPath;
+
+            $publicStoragePath = public_path('storage/' . $optimizedPath);
+            $publicDir = dirname($publicStoragePath);
+            if (!file_exists($publicDir)) {
+                mkdir($publicDir, 0755, true);
+            }
+            copy($finalStoragePath, $publicStoragePath);
+            $data['photo'] = 'storage/' . $optimizedPath;
+        //    $data['photo'] = $optimizedPath;
         }
 
         $user = User::create($data);
