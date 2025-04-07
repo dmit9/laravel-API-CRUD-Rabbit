@@ -5,7 +5,6 @@ use App\Http\Controllers\Api\V1\TokenController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Middleware\SuccessMiddleware;
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
 use Illuminate\Http\Request;
 use App\Http\Controllers\RabbitController;
 
@@ -26,16 +25,6 @@ Route::group(['prefix' => 'user'], function () {
 Route::prefix('api/v1')->group(function () {
     Route::post('/users', [UserController::class, 'store'])->middleware('auth:sanctum');
     Route::apiResource('users', UserController::class);
-=======
-
-Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->name('index');;
-Route::get('web/users/{user}', [App\Http\Controllers\IndexController::class, 'show'])->name('web.users.show');
-Route::post('web/users', [App\Http\Controllers\IndexController::class, 'store'])->name('web.users.store');
-
-Route::prefix('api/v1')->middleware(SuccessMiddleware::class)->group(function () {
-    Route::post('/users', [UserController::class, 'store'])->middleware('auth:sanctum');
-    Route::apiResource('users', \App\Http\Controllers\Api\V1\UserController::class);
->>>>>>> 32571635c3cf78df90e016052fa98bb7d2cef48a
     Route::get('positions', [PositionController::class, 'index']);
     Route::get('/token', [TokenController::class, 'generateToken']);
 });

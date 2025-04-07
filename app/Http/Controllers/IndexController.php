@@ -4,15 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Api\V1\TokenController;
 use App\Http\Requests\StoreUserRequest;
-<<<<<<< HEAD
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\V1\UserResource;
 use App\Models\Position;
 use Illuminate\Http\Request;
-=======
-use App\Http\Resources\V1\UserResource;
-use App\Models\Position;
->>>>>>> 32571635c3cf78df90e016052fa98bb7d2cef48a
 use App\Models\User;
 use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
@@ -22,7 +17,6 @@ use function Tinify\setKey;
 
 class IndexController extends Controller
 {
-<<<<<<< HEAD
     public function index(Request $request)
     {
                // $users = UserResource::collection(User::paginate(6));
@@ -34,13 +28,6 @@ class IndexController extends Controller
         $positions = Position::all();
         $users = User::with('position')->orderBy($sortField, $sortDirection)->paginate(5);
         return view('index', compact('users', 'positions', 'sortField', 'sortDirection'));
-=======
-    public function index()
-    {
-        $users = UserResource::collection(User::paginate(6));
-        $positions = Position::all();
-        return view('index', compact('users', 'positions'));
->>>>>>> 32571635c3cf78df90e016052fa98bb7d2cef48a
     }
 
     public function show(User $user)
@@ -83,11 +70,7 @@ class IndexController extends Controller
                 mkdir($publicDir, 0755, true);
             }
             copy($finalStoragePath, $publicStoragePath);
-<<<<<<< HEAD
             $data['photo'] =  $optimizedPath;
-=======
-            $data['photo'] = 'storage/' . $optimizedPath;
->>>>>>> 32571635c3cf78df90e016052fa98bb7d2cef48a
         //    $data['photo'] = $optimizedPath;
         }
 
@@ -104,7 +87,6 @@ class IndexController extends Controller
         return redirect()->route('index')->with('success', 'User created successfully');
     }
 
-<<<<<<< HEAD
     public  function  edit(User $user)
     {
         $positions = Position::all();
@@ -165,7 +147,5 @@ class IndexController extends Controller
 
     }
 
-=======
->>>>>>> 32571635c3cf78df90e016052fa98bb7d2cef48a
 
 }

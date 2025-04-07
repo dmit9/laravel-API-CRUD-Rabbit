@@ -8,7 +8,6 @@
 
 </head>
 <body>
-<<<<<<< HEAD
 
 <div class="container mb-3 mt-3">
     <nav class="d-flex">
@@ -44,34 +43,6 @@
         </div>
 
     </div>
-=======
-<nav class="d-flex">
-    <div class="mb-3">
-        <h2><a href="/"> All users</a></h2>
-    </div>
-
-</nav>
-<div class="d-flex flex-wrap ">
-            <div class="d-flex">
-
-                <ul>
-                    <li>id: {{$user->id}}</li>
-                    <li>name: {{$user->name}}</li>
-                    <li>phone: {{$user->phone}}</li>
-                    @foreach($positions as $position)
-                        @if( $position->id == $user->position_id )
-                            <li>position: {{$position->name}}</li>
-                            <li>position_id: {{$position->id}}</li>
-                        @endif
-                    @endforeach
-                    <li>registration_timestamp: {{$user->created_at}}</li>
-                    <li>photo url: {{$user->photo}}</li>
-                    <img width="200" height="200" src="{{asset('storage/' . $user->photo)}}">
-                    <li>remember_token: {{$user->remember_token}}</li>
-                </ul>
-            </div>
-
->>>>>>> 32571635c3cf78df90e016052fa98bb7d2cef48a
 </div>
 
 
