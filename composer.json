@@ -7,10 +7,20 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+<<<<<<< HEAD
+        "ext-curl": "*",
+=======
+>>>>>>> 32571635c3cf78df90e016052fa98bb7d2cef48a
         "intervention/image": "2.7",
         "laravel/framework": "^11.31",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+<<<<<<< HEAD
+        "php-amqplib/php-amqplib": "^3.7",
+        "stomp-php/stomp-php": "^5.1",
+        "textalk/websocket": "^1.5",
+=======
+>>>>>>> 32571635c3cf78df90e016052fa98bb7d2cef48a
         "tinify/tinify": "^1.6"
     },
     "require-dev": {
