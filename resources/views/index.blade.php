@@ -25,7 +25,7 @@
     <div class="d-flex gap-2 mb-3">
         <div class="col-lg-6 col-6 border border-secondary rounded p-1">
             <h3>Add User</h3>
-            <form action="{{route('users.store')}}" method="POST" enctype="multipart/form-data" class="mb-3 ">
+            <form action="{{route('user.store')}}" method="POST" enctype="multipart/form-data" class="mb-3 ">
                 @csrf
                 @method('POST')
                 <input name="name" class="form-control" placeholder="enter name">
