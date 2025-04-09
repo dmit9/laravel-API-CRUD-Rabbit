@@ -23,10 +23,15 @@ class IndexController extends Controller
         // Получаем параметры сортировки из запроса
         $sortField = $request->query('sort', 'id'); // По умолчанию сортируем по 'id'
         $sortDirection = $request->query('direction', 'desc'); // По умолчанию 'desc' (от новых к старым)
-        // Запрос с сортировкой
-//        $users = User::orderBy($sortField, $sortDirection)->paginate(6);
         $positions = Position::all();
-        $users = User::with('position')->orderBy($sortField, $sortDirection)->paginate(5);
+        if($paramFilter = $request->query('_name')){
+            $paramFilter = preg_replace("#([%_?+])#","\\$1",$paramFilter);
+            $users = User::with('position')->where('name', 'LIKE', '%'.$paramFilter.'%')->orderBy($sortField, $sortDirection)->paginate(50);
+        } else {
+            // Запрос с сортировкой
+//        $users = User::orderBy($sortField, $sortDirection)->paginate(6);
+            $users = User::with('position')->orderBy($sortField, $sortDirection)->paginate(5);
+        }
         return view('index', compact('users', 'positions', 'sortField', 'sortDirection'));
     }
 

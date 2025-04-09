@@ -17,7 +17,7 @@
              <p>Sourse code <a href='https://github.com/dmit9/laravel-API-CRUD-test' target="_blank">github.com/dmit9/laravel-API-CRUD-test</a></p>
         </div>
         <div class="mb-3">
-            <h2><a href="{{route('rabbit')}}" > rabbitmq send</a></h2>
+            <h2><a href="{{route('rabbit')}}" > rabbitmq sender</a></h2>
         </div>
 
     </nav>
@@ -99,6 +99,11 @@
             Date {{ $sortField === 'created_at' ? ($sortDirection === 'asc' ? '⬆️' : '⬇️') : '' }}
         </a>
     </div>
+    <form action="{{route('index')}}" method="GET" enctype="multipart/form-data" class="mb-3 d-flex justify-content-between  gap-2 border border-secondary rounded p-1">
+        <input name="_name" class="form-control w-50" placeholder="Search by name">
+        <label for="position_id" >found {{count($users)}}</label>
+        <button type="submit" value="Add" class="btn btn-primary ">Search</button>
+    </form>
     <div class="d-flex flex-wrap gap-2">
         @foreach($users as $user)
             <div class="d-flex  border border-secondary rounded p-1">
