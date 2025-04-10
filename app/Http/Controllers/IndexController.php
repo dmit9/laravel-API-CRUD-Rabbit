@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Api\V1\TokenController;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Http\Resources\V1\UserResource;
 use App\Models\Position;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
 use Tinify\Source;
 use Illuminate\Support\Str;
@@ -23,10 +20,19 @@ class IndexController extends Controller
         // Получаем параметры сортировки из запроса
         $sortField = $request->query('sort', 'id'); // По умолчанию сортируем по 'id'
         $sortDirection = $request->query('direction', 'desc'); // По умолчанию 'desc' (от новых к старым)
-        // Запрос с сортировкой
-//        $users = User::orderBy($sortField, $sortDirection)->paginate(6);
         $positions = Position::all();
-        $users = User::with('position')->orderBy($sortField, $sortDirection)->paginate(5);
+        if($paramFilter = $request->query('_name')){
+            $paramFilter = preg_replace("#([%_?+])#","\\$1",$paramFilter);
+            $users = User::with('position')
+            ->where('name', 'LIKE', '%'.$paramFilter.'%')
+            ->orWhere('email', 'LIKE', '%'.$paramFilter.'%')
+            ->orWhere('phone', 'LIKE', '%'.$paramFilter.'%')
+            ->orderBy($sortField, $sortDirection)->paginate(50);
+        } else {
+            // Запрос с сортировкой
+//        $users = User::orderBy($sortField, $sortDirection)->paginate(6);
+            $users = User::with('position')->orderBy($sortField, $sortDirection)->paginate(5);
+        }
         return view('index', compact('users', 'positions', 'sortField', 'sortDirection'));
     }
 
@@ -139,7 +145,7 @@ class IndexController extends Controller
 
         return redirect()->route('index');
     }
-    
+
     public function rabbit()
     {
      //   return redirect()->route('rabbit');

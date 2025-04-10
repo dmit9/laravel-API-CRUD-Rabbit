@@ -14,10 +14,10 @@
     <nav class="d-flex justify-content-around mb-3">
         <div>
             <h2>Users</h2>
-             <p>Sourse code <a href='https://github.com/dmit9/laravel-API-CRUD-test' target="_blank">github.com/dmit9/laravel-API-CRUD-test</a></p>
+             <p>Sourse code <a href='https://github.com/dmit9/laravel-API-CRUD-Rabbit' target="_blank">github.com/dmit9/laravel-API-CRUD-Rabbit</a></p>
         </div>
         <div class="mb-3">
-            <h2><a href="{{route('rabbit')}}" > rabbitmq send</a></h2>
+            <h2><a href="{{route('rabbit')}}" > rabbitmq sender</a></h2>
         </div>
 
     </nav>
@@ -25,7 +25,7 @@
     <div class="d-flex gap-2 mb-3">
         <div class="col-lg-6 col-6 border border-secondary rounded p-1">
             <h3>Add User</h3>
-            <form action="{{route('users.store')}}" method="POST" enctype="multipart/form-data" class="mb-3 ">
+            <form action="{{route('user.store')}}" method="POST" enctype="multipart/form-data" class="mb-3 ">
                 @csrf
                 @method('POST')
                 <input name="name" class="form-control" placeholder="enter name">
@@ -75,8 +75,7 @@
             <p><a href="/api/v1/users" target="_blank">/api/v1/users</a></p>
             <p><a href="/api/v1/positions" target="_blank">/api/v1/positions</a></p>
             <p><a href="/api/v1/token" target="_blank">/api/v1/token</a></p>
-            <p><a href="/" target="_blank">/public/</a></p>
-            <p><a href="user/20" target="_blank">user/20</a></p>
+            <p><a href="user/5" target="_blank">user/5</a></p>
         </div>
     </div>
     <div class=" pagination-sm pagination">
@@ -99,6 +98,11 @@
             Date {{ $sortField === 'created_at' ? ($sortDirection === 'asc' ? '⬆️' : '⬇️') : '' }}
         </a>
     </div>
+    <form action="{{route('index')}}" method="GET" enctype="multipart/form-data" class="mb-3 d-flex justify-content-between  gap-2 border border-secondary rounded p-1">
+        <input name="_name" class="form-control w-50" placeholder="search by name, email, phone">
+        <label for="position_id" >found {{count($users)}}</label>
+        <button type="submit" value="Add" class="btn btn-primary ">Search</button>
+    </form>
     <div class="d-flex flex-wrap gap-2">
         @foreach($users as $user)
             <div class="d-flex  border border-secondary rounded p-1">
